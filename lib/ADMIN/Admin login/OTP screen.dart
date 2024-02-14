@@ -7,7 +7,6 @@ import 'package:pinput/pinput.dart';
 
 import '../Youtube/Admin panal.dart';
 
-
 class Otpscreen extends StatefulWidget {
   String verificationid;
   Otpscreen({super.key, required this.verificationid});
