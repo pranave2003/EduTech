@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -111,7 +110,6 @@ class _AdminloginState extends State<Adminlogin> {
                           ),
                         ),
                         SizedBox(height: height * 0.064),
-
                         Padding(
                           padding: const EdgeInsets.only(left: 16.0),
                           child: Text(
@@ -126,7 +124,6 @@ class _AdminloginState extends State<Adminlogin> {
                         const SizedBox(height: 6.0),
                         TextFormField(
                           controller: email,
-
                           decoration: InputDecoration(
                               fillColor: AppColors.whiteColor,
                               suffixIcon: Icon(Icons.email),
@@ -141,25 +138,24 @@ class _AdminloginState extends State<Adminlogin> {
                                       vertical: 10, horizontal: 15)
                                   .r,
                               focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: AppColors.blueDarkColor),
+                                borderSide: const BorderSide(
+                                    color: AppColors.blueDarkColor),
                                 borderRadius: BorderRadius.circular(8).r,
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color:AppColors.blueDarkColor),
+                                borderSide: const BorderSide(
+                                    color: AppColors.blueDarkColor),
                                 borderRadius: BorderRadius.circular(8).r,
                               ),
                               border: const OutlineInputBorder()),
                           validator: (value) {
                             if (value!.isEmpty) {
                               return "Enter Password";
-                            } else if (email.text!='kmo@gmail.com') {
+                            } else if (email.text != 'kmo@gmail.com') {
                               return "E-mail don't match";
                             }
                           },
                         ),
-
                         SizedBox(height: height * 0.014),
                         Padding(
                           padding: const EdgeInsets.only(left: 16.0),
@@ -196,42 +192,39 @@ class _AdminloginState extends State<Adminlogin> {
                                     : Icons.visibility_off),
                               ),
                               contentPadding: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 15)
+                                      vertical: 10, horizontal: 15)
                                   .r,
                               focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                const BorderSide(color: AppColors.blueDarkColor),
+                                borderSide: const BorderSide(
+                                    color: AppColors.blueDarkColor),
                                 borderRadius: BorderRadius.circular(8).r,
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                const BorderSide(color:AppColors.blueDarkColor),
+                                borderSide: const BorderSide(
+                                    color: AppColors.blueDarkColor),
                                 borderRadius: BorderRadius.circular(8).r,
                               ),
                               border: const OutlineInputBorder()),
                           validator: (value) {
                             if (value!.isEmpty) {
                               return "Enter Password";
-                            } else if (password.text!='kmo123') {
+                            } else if (password.text != 'kmo123') {
                               return "Password don't match";
                             }
                           },
                         ),
-
-
                         SizedBox(height: height * 0.05),
                         Material(
                           color: Colors.transparent,
                           child: InkWell(
                             onTap: () {
                               if (_formfield.currentState!.validate()) {
-                                if (email.text == 'kmo@gmail.com'&&
+                                if (email.text == 'kmo@gmail.com' &&
                                     password.text == 'kmo123') {
                                   print("click");
                                   Navigator.push(context, MaterialPageRoute(
                                     builder: (context) {
                                       return Phoneauth();
-
                                     },
                                   ));
                                 }
@@ -242,9 +235,8 @@ class _AdminloginState extends State<Adminlogin> {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 70.0, vertical: 18.0),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.purple
-                              ),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  color: Colors.purple),
                               child: Text(
                                 'Login',
                                 style: ralewayStyle.copyWith(
