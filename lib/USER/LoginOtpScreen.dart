@@ -37,7 +37,7 @@ class _LoginOtpState extends State<LoginOtp> {
       await FirebaseAuth.instance.signInWithCredential(credential);
 
       print("<<<<<<<<<<<<<go dashboard>>>>>>>>>>>>");
-      if (status == "1") {
+      if (state == "1") {
         print('<<<<<<<<<<<<<<<<<<<<<pro>>>>>>>>>>>>>>>>>>>>>');
         Navigator.push(
           context,
@@ -75,15 +75,15 @@ class _LoginOtpState extends State<LoginOtp> {
     getData();
   }
 
-  String status = '';
+  var state = '';
 
   Future<void> getData() async {
     SharedPreferences spref = await SharedPreferences.getInstance();
     setState(() {
-      status = spref.getString("status")!;
+      state = spref.getString("states")!;
 
-      spref.setString('status', status);
-      print('status=$status');
+      spref.setString('status', state);
+      print('status=$state');
     });
     print("Updated");
   }

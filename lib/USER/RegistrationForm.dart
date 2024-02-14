@@ -75,6 +75,7 @@ class _RegistrationFoarmState extends State<RegistrationFoarm> {
       "College": selectedcollegeValue,
       "Department": selectedDepartmentValue,
       "Year": SelectedYear,
+      "Status": 0
     });
 
     await Navigator.pushReplacement(

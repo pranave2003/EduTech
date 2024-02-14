@@ -22,14 +22,14 @@ class MobileLogin extends StatefulWidget {
 
 class _MobileLoginState extends State<MobileLogin> {
   //
-  String id = '';
-  String name = '';
-  String email = '';
-  String phone = '';
-  String collage = '';
-  String department = '';
-  String Year = '';
-  String status = '';
+  var id = '';
+  var name = '';
+  var email = '';
+  var phone = '';
+  var collage = '';
+  var department = '';
+  var Year = '';
+  var status;
 
   //get data to mobile number
   void userLogin() async {
@@ -37,6 +37,7 @@ class _MobileLoginState extends State<MobileLogin> {
         .collection('UserRegister')
         .where('Phone number', isEqualTo: phoneController.text)
         .get();
+    print("get data");
     if (user.docs.isNotEmpty) {
       id = user.docs[0].id;
       name = user.docs[0]['Name'];
@@ -45,11 +46,11 @@ class _MobileLoginState extends State<MobileLogin> {
       Year = user.docs[0]['Year'];
       collage = user.docs[0]['College'];
       department = user.docs[0]['Department'];
-
-      user.docs[0]['status'];
+      status = user.docs[0]['Status'];
+      print("Status==$status");
 
       SharedPreferences data = await SharedPreferences.getInstance();
-      // data.setString('status', status);
+      // data.setString('states', status);
       // data.setString('id', id);
       data.setString('name', name);
       data.setString('email', email);
