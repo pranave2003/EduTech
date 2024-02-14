@@ -1,9 +1,8 @@
 import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:eduapp/USER/VedioPlayList/VedioPlayer.dart';
-import 'package:eduapp/USER/VedioPlayList/Widgets/customCupertinoTextField.dart';
-import 'package:eduapp/USER/VedioPlayList/vedioList.dart';
+
+import 'package:edutech/USER/VedioPlayList/vedioList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
