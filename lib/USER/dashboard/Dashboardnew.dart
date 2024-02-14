@@ -1,15 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:edutech/USER/LOGIN%20SCREEN.dart';
+import 'package:edutech/USER/Premium/premium%20VedioPlayList/pro%20VedioCatergories.dart';
+import 'package:edutech/USER/UserNotification.dart';
+import 'package:edutech/USER/premiumBuy.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../LOGIN SCREEN.dart';
-import '../UserNotification.dart';
-import '../VedioPlayList/VedioCatergories.dart';
-import '../premiumBuy.dart';
 import 'SubjectList.dart';
 
 class Dashboard extends StatefulWidget {
@@ -28,37 +26,26 @@ class _DashboardState extends State<Dashboard> {
         context, MaterialPageRoute(builder: (context) => MobileLogin()));
   }
 
-  DocumentSnapshot? user;
   var Name1;
   var Mobile;
   var department;
   var Email;
   var Year;
   var college;
-  var status;
-  var id;
-  //
-
-  String statuse = '';
   void initState() {
     getData();
-    // project();
   }
 
   Future<void> getData() async {
     SharedPreferences spref = await SharedPreferences.getInstance();
     setState(() {
-      id = spref.getString('id');
       Name1 = spref.getString('name');
       Email = spref.getString("email");
       Mobile = spref.getString("phone");
       college = spref.getString("collage");
       department = spref.getString("Department");
       Year = spref.getString("Year");
-      status = spref.getString("status")!;
 
-      spref.setString('status', status);
-      spref.setString('id', id);
       spref.setString('name', Name1);
       spref.setString("email", Email);
       spref.setString("phone", Mobile);
@@ -66,13 +53,8 @@ class _DashboardState extends State<Dashboard> {
       spref.setString("Department", department);
       spref.setString("Year", Year);
     });
-
     print("Updated");
   }
-
-
-  //
-  //
 
   @override
   Widget build(BuildContext context) {
@@ -196,7 +178,7 @@ class _DashboardState extends State<Dashboard> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => VedioCategory(),
+                    builder: (context) => proVedioCategory(),
                   ));
             },
             child: Container(

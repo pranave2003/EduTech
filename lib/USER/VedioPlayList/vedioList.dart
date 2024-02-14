@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:eduapp/USER/VedioPlayList/VedioCatergories.dart';
-import 'package:eduapp/USER/VedioPlayList/VedioPlayer.dart';
-import 'package:eduapp/USER/VedioPlayList/test/body.dart';
-import 'package:eduapp/USER/VedioPlayList/test/player.dart';
+import 'package:edutech/USER/VedioPlayList/VedioCatergories.dart';
+import 'package:edutech/USER/VedioPlayList/test/player.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shimmer/shimmer.dart';
 
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
