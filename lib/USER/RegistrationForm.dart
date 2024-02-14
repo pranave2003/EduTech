@@ -7,9 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'dashboard/Dashboardnew.dart';
-
-
+import '../dashboard/Dashboardnew.dart';
 
 class RegistrationFoarm extends StatefulWidget {
   const RegistrationFoarm({super.key});
@@ -20,6 +18,7 @@ class RegistrationFoarm extends StatefulWidget {
 
 class _RegistrationFoarmState extends State<RegistrationFoarm> {
   var mob = '';
+
   void initState() {
     getData();
   }
