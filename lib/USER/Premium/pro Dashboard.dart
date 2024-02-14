@@ -1,5 +1,6 @@
-import 'package:eduapp/USER/Premium/premium%20VedioPlayList/pro%20VedioCatergories.dart';
-import 'package:eduapp/USER/Premium/pro%20notification.dart';
+
+import 'package:edutech/USER/Premium/premium%20VedioPlayList/pro%20VedioCatergories.dart';
+import 'package:edutech/USER/Premium/pro%20notification.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

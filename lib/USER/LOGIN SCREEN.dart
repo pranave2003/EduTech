@@ -49,8 +49,8 @@ class _MobileLoginState extends State<MobileLogin> {
       user.docs[0]['status'];
 
       SharedPreferences data = await SharedPreferences.getInstance();
-      data.setString('status', status);
-      data.setString('id', id);
+      // data.setString('status', status);
+      // data.setString('id', id);
       data.setString('name', name);
       data.setString('email', email);
       data.setString('phone', phone);
