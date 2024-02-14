@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 import '../LOGIN SCREEN.dart';
 import '../UserNotification.dart';
 import '../VedioPlayList/VedioCatergories.dart';
@@ -59,7 +58,6 @@ class _DashboardState extends State<Dashboard> {
       status = spref.getString("status")!;
 
       spref.setString('status', status);
-
       spref.setString('id', id);
       spref.setString('name', Name1);
       spref.setString("email", Email);
@@ -72,9 +70,6 @@ class _DashboardState extends State<Dashboard> {
     print("Updated");
   }
 
-  get() async {
-    user = await FirebaseFirestore.instance.collection('User').doc(id).get();
-  }
 
   //
   //

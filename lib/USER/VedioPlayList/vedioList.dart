@@ -1,16 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'package:edutech/USER/VedioPlayList/VedioPlayer.dart';
+import 'package:eduapp/USER/VedioPlayList/VedioCatergories.dart';
+import 'package:eduapp/USER/VedioPlayList/VedioPlayer.dart';
+import 'package:eduapp/USER/VedioPlayList/test/body.dart';
+import 'package:eduapp/USER/VedioPlayList/test/player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
+
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VedioListUser extends StatefulWidget {
   const VedioListUser({
     super.key,
-    required this.course,
+    this.course,
 
     //  required String this.id
   });
@@ -24,7 +27,8 @@ class VedioListUser extends StatefulWidget {
 class _VedioListUserState extends State<VedioListUser> {
   List allResult = [];
   List resultList = [];
-  // var searchName = '';
+  var data;
+  bool isLoaded = false;
   final TextEditingController searchController = TextEditingController();
 
   @override
@@ -37,7 +41,15 @@ class _VedioListUserState extends State<VedioListUser> {
   }
 
   getClientStream() async {
-    var data = await FirebaseFirestore.instance
+    Future.delayed(
+      Duration(milliseconds: 3000),
+      () {
+        setState(() {
+          isLoaded = true;
+        });
+      },
+    );
+    data = await FirebaseFirestore.instance
         .collection('video')
         .where('trade', isEqualTo: widget.course)
         .get();
@@ -45,6 +57,7 @@ class _VedioListUserState extends State<VedioListUser> {
     setState(() {
       allResult = data.docs;
       print('-------${allResult[0]['url']}');
+      // isLoaded = true;
     });
     searchResultList();
   }
@@ -89,8 +102,18 @@ class _VedioListUserState extends State<VedioListUser> {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         appBar: AppBar(
+            // scrolledUnderElevation: 10,
 
-            // leading: BackButton(color: Colors.white),
+            leading: BackButton(
+              color: Colors.white,
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VedioCategory(),
+                    ));
+              },
+            ),
             // title: Text('Vedio List'),
             // titleTextStyle: TextStyle(color: Colors.white, fontSize: 15.sp),
             backgroundColor: Colors.purple,
@@ -99,11 +122,8 @@ class _VedioListUserState extends State<VedioListUser> {
               backgroundColor: Colors.white,
               controller: searchController,
             )),
-        body: allResult.isEmpty
-            ? LinearProgressIndicator(
-                color: Colors.purple,
-              )
-            : resultList.isEmpty
+        body: isLoaded
+            ? resultList.isEmpty
                 ? Center(
                     child: Lottie.network(
                         'https://lottie.host/08fad6f8-46ea-4771-bcfb-9fc59cb9128a/A0vHdKzMT5.json',
@@ -126,8 +146,9 @@ class _VedioListUserState extends State<VedioListUser> {
                                 builder: (context) {
                                   print('---${resultList[index]['url']}');
 
-                                  return VedioplayerUser(
+                                  return Player(
                                       vedioId: resultList[index]['url'],
+                                      id: allResult[index].id,
                                       remains: allResult);
                                 },
                               ));
@@ -139,6 +160,7 @@ class _VedioListUserState extends State<VedioListUser> {
                                 Container(
                                   height: 100,
                                   width: 150,
+                                  color: Colors.grey.shade100,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(6.w),
                                     child: Image.network(
@@ -146,6 +168,31 @@ class _VedioListUserState extends State<VedioListUser> {
                                         videoId: resultList[index]['url'],
                                       ),
                                       fit: BoxFit.fill,
+                                      loadingBuilder:
+                                          (context, child, loadingProgress) {
+                                        if (loadingProgress == null)
+                                          return child;
+                                        return Center(
+                                            child: CupertinoActivityIndicator(
+                                                // color: Colors.grey.shade500,
+                                                ));
+                                      },
+                                      errorBuilder:
+                                          (context, error, stackTrace) =>
+                                              Center(
+                                                  child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.error_outline,
+                                            color: Colors.grey,
+                                          ),
+                                          Text('network error'),
+                                        ],
+                                      )),
                                     ),
                                   ),
                                 ),
@@ -173,6 +220,57 @@ class _VedioListUserState extends State<VedioListUser> {
                         ),
                       );
                     },
-                  ));
+                  )
+            : GetShimmerLoading());
   }
+
+  Shimmer GetShimmerLoading() {
+    return Shimmer.fromColors(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: ListView.separated(
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: resultList.length,
+            separatorBuilder: (context, index) => SizedBox(
+              height: 20.h,
+            ),
+            itemBuilder: (context, index) => Row(
+              children: [
+                CustomCuntainer(height: 100.h, width: 150.w),
+                SizedBox(
+                  width: 10.w,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomCuntainer(height: 15.h, width: 100),
+                    SizedBox(
+                      height: 15.h,
+                    ),
+                    CustomCuntainer(height: 15.h, width: 200),
+                    SizedBox(
+                      height: 15.h,
+                    ),
+                    CustomCuntainer(height: 15.h, width: 100),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+        baseColor: Colors.grey.shade500,
+        highlightColor: Colors.grey.shade100);
+  }
+
+  Container CustomCuntainer({
+    double? width,
+    double? height,
+  }) =>
+      Container(
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(6.r), color: Colors.yellow),
+      );
 }
